@@ -29,12 +29,13 @@ export class Form {
       responseConstraint: {
         type: 'object',
         properties: {
-          name: { type: 'string' },
+          name: { type: 'string', description: 'Try to determine the name of the human! No company please.' },
           city: { type: 'string' },
         },
       },
     });
     console.log(result);
+    this.model.set(JSON.parse(result));
   }
 
   async paste() {
