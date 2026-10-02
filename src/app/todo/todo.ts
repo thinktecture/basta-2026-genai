@@ -29,6 +29,7 @@ import {TODO_TOOL} from './tools';
 export class Todo implements OnInit {
   protected llmService = new LlmService();
   // LAB #3, #4
+  protected readonly reply = signal('');
 
   async ngOnInit() {
     // LAB #2
@@ -37,10 +38,28 @@ export class Todo implements OnInit {
 
   async runPrompt(userPrompt: string, inferenceEngine: string) {
     // LAB #3, #9
+    this.reply.set('…');
+    
+    const chunks = inferenceEngine === 'transformers-js'
+      ? this.inferTransformersJs(userPrompt)
+      : this.inferPromptApi(userPrompt);
+
+    let reply = '';
+    for await (const chunk of chunks) {
+      reply += chunk;
+      this.reply.set(reply);
+    }
   }
 
   inferTransformersJs(userPrompt: string) {
     // LAB #3, #6, #7, #8, #9
+    this.llmService.clearPastKeyValues();
+
+    const messages = [
+      { role: "user", content: userPrompt },
+    ];
+
+    return this.llmService.generateResponse(messages, []);
   }
 
   async* inferPromptApi(userPrompt: string): AsyncGenerator<string> {
