@@ -25,7 +25,15 @@ export class Form {
         content: `Extract the information to a JSON object of this shape: ${JSON.stringify(this.model())}`,
       }],
     });
-    const result = await languageModel.prompt(value);
+    const result = await languageModel.prompt(value, {
+      responseConstraint: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          city: { type: 'string' },
+        },
+      },
+    });
     console.log(result);
   }
 
