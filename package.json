@@ -38,6 +38,7 @@
     "@angular/build": "^22.2.1",
     "@angular/cli": "^22.2.1",
     "@angular/compiler-cli": "^22.2.1",
+    "@mcp-b/webmcp-types": "^5.1.0",
     "@types/dom-chromium-ai": "^0.0.17",
     "@types/jasmine": "~5.1.0",
     "istanbul-lib-instrument": "^6.0.3",

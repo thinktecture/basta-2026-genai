@@ -18,6 +18,21 @@ export class Form {
   });
   protected readonly form = form(this.model);
 
+  constructor() {
+    document.modelContext?.registerTool({
+      name: 'fill-form',
+      description: 'Fill this form!',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          city: { type: 'string' },
+        },
+      },
+      execute: (result) => this.model.set(result as any),
+    });
+  }
+
   async fillForm(value: string) {
     const languageModel = await LanguageModel.create({
       initialPrompts: [{
