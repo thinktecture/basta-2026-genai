@@ -1,1 +1,7 @@
 <!-- LAB #13, #14 -->
+<input type="text" #fillInput>
+<button (click)="fillForm(fillInput.value)">Fill form</button>
+<form>
+    <input placeholder="Name" [formField]="form.name">
+    <input placeholder="City" [formField]="form.city">
+</form>

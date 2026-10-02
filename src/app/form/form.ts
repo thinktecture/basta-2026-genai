@@ -12,4 +12,11 @@ import { form, FormField } from '@angular/forms/signals';
 })
 export class Form {
   // LAB #13, #14, #15, #16, #17, #18
+  protected readonly model = signal({
+    name: '',
+    city: '',
+  });
+  protected readonly form = form(this.model);
+
+  async fillForm(value: string) {}
 }
