@@ -32,6 +32,7 @@ export class Todo implements OnInit {
 
   async ngOnInit() {
     // LAB #2
+    await this.llmService.loadModel('2.6B');
   }
 
   async runPrompt(userPrompt: string, inferenceEngine: string) {
